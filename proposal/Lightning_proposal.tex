@@ -1,0 +1,9 @@
+\documentclass{article}
+\title{Physics 2218 Lab proposal:\\ Lightning sound simulation}
+\author{Sal Elder | James Noeckel | Ariel Donlin}
+\date{Fall 2014}
+\begin{document}
+\maketitle
+\paragraph {Goals} We plan to simulate the sound of generated lightning bolts. Ultimately it would be nice to be able to try different boundary conditions such as clouds.
+\paragraph {Technical details} This involves solving the wave equation $\partial ^2u/\partial t^2=v^2\nabla ^2u$ for displacements along one direction, $u=\Delta x.$ From there we will generalize to two and three dimensions. We plan to use some sort of random walk for the generation of lightning bolt shapes. For computational purposes it will be convenient to use a box for the boundary conditions, with its walls parallel to coordinate axes. We would like to be able to vary the boundary conditions at these walls, beginning with hard-wall conditions (i.e., no displacement permitted) and moving on to more realistic, energy-absorbing, models.
+\end{document}
