@@ -1,4 +1,5 @@
 \documentclass{article}
+\usepackage{fullpage}
 \title{Physics 2218 Lab proposal:\\ Lightning sound simulation}
 \author{Sal Elder | James Noeckel | Ariel Donlin}
 \date{Fall 2014}
@@ -6,4 +7,11 @@
 \maketitle
 \paragraph {Goals} We plan to simulate the sound of generated lightning bolts. Ultimately it would be nice to be able to try different boundary conditions such as clouds.
 \paragraph {Technical details} This involves solving the wave equation $\partial ^2u/\partial t^2=v^2\nabla ^2u$ for density along one direction, $u=\rho_x.$ It is acceptable to use linear density instead of displacement because the wave equation governs any wave-like phenomenon, and for transverse displacements there will naturally be oscillations in density. (Density can then be related to pressure, which will ulitmately be useful when sampling simulation data to generate a sound waveform.) From there we will generalize to two and three dimensions. We plan to use some sort of random walk for the generation of lightning bolt shapes. For computational purposes it will be convenient to use a box for the boundary conditions, with its walls parallel to coordinate axes. We would like to be able to vary the boundary conditions at these walls, beginning with hard-wall conditions (i.e., no displacement permitted, which is equivalent to a requirement of constant density) and moving on to more realistic, energy-absorbing, models.
+\paragraph{Integration scheme} We will use spectral methods with (complex) sinusoids. Our plan can be broken down roughly as follows:
+\begin{itemize}
+\item Given an initial condition (bolt) $B(x,y,z),$ use a fast Fourier transform (FFT) algorithm to express $B$ as a sum of sinusoids 
+\item Expand the solution $u(t,x,y,z)$ similarly, with coefficients $a_n(t)$
+\item Analytically solve for $a_n(t)$ in terms of $a_n(0),$ and relate this latter term to the coefficients determined in the FFT above
+\end{itemize}
+It seems from this outline that the computational bottleneck in this problem is the performance of the FFT. Based on the methodology and data available at fftw.org, an FFT benchmarking site, it seems that for a 3d transform we can expect on the order of $10^3$ million floating point operations per second. The site also gives a formula for the number of operations required, $5N\log_2 N,$ where $N$ is the number of grid points. Therefore, for a total simulation time $T \approx 10^4\ \mathrm{s},$ we expect the largest reasonable simulation to be one with $N \approx 5\times 10^10.$ For a grid resolution of $\delta=5\ \mathrm{cm}$ this would correspond to a box with edge length $\delta\sqrt{3}{N}\approx 0.2\ \mathrm{km}.$
 \end{document}
