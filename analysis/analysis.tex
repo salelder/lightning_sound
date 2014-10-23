@@ -1,0 +1,13 @@
+\documentclass{article}
+\title{Some analysis for lightning strike project}
+\begin{document}
+\maketitle
+Suppose we have some initial condition $f(x)$ on a 1d system such as a displacement along a string. Then the FFT gives us the $c_n(0)$ in:
+\begin{equation}
+f(x)=\sum_n c_n(0)e^{i(2\pi k_1 n) x}.
+\end{equation}$k_1n$ is the $n$th ``linear frequency.'' $k_1$ is the minimum frequency, $1/n\Delta,$ where $\Delta=$ spacing between sample points. In other words, $k_1$ is one divided by the total length of the system.
+
+We generalize Eq.~(1) by replacing $c_n(0)$ with $c_n(t).$ Recall the wave equation,\begin{equation}\frac{\partial^2f}{\partial t^2}=v^2\left(\frac{\partial^2f}{\partial x^2}\right).\end{equation}Substituting the time-dependent analogue of Eq.~(1) into (2) results in:
+\begin{equation}\sum_n\ddot{c}_n e^{i(2\pi k_1 n)x}=v^2\sum_n -c_n (4\pi^2k_1^2n^2)e^{i(2\pi k_1 n)x}.\end{equation}
+Blah, blah, blah, linearity, blah, and we get:\begin{equation}\ddot{c}_n+(2v\pi k_1n)^2c=0,\end{equation} which has solutions of the form \begin{equation}c_n(t)=A\sin\omega t+B\cos\omega t,\end{equation} in which for zero initial velocity we can take $A=0,\ B=c_n(0).$ We then have the a time-dependent set of fourier coefficients. Applying the inverse FFT to these coefficients for any time $t_1$ gives us the solution of the wave equation at that time $t_1.$
+\end{document}
